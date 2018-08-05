@@ -48,7 +48,7 @@
             android:authorities="com.example.xyzreader"
             android:exported="false" />
 
-        <activity android:name=".ui.ReadActivity"></activity>
+        <activity android:name=".ui.ReadActivity" />
     </application>
 
 </manifest>

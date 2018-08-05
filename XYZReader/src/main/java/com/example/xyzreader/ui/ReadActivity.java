@@ -5,8 +5,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Slide;
-import android.view.Gravity;
+import android.transition.Fade;
 import android.view.Window;
 import android.widget.ListView;
 
@@ -19,7 +18,7 @@ import java.util.Arrays;
 
 
 public class ReadActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<Cursor>{
+        implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private Cursor mCursor;
 
@@ -28,10 +27,8 @@ public class ReadActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         if (MiscUtils.LOLLIPOP_AND_HIGHER) {
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-            Slide slide = new Slide();
-            slide.setDuration(1000);
-            slide.setSlideEdge(Gravity.TOP);
-            getWindow().setEnterTransition(slide);
+            Fade fade = new Fade();
+            getWindow().setEnterTransition(fade);
         }
         setContentView(R.layout.activity_read);
 

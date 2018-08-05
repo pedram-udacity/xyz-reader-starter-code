@@ -21,5 +21,6 @@
     <dimen name="body_text_view_bottom_margin">8dp</dimen>
     <dimen name="body_text_view_text_size">16sp</dimen>
     <dimen name="article_body_padding">8dp</dimen>
+    <dimen name="fab_dimensions">56dp</dimen>
 
 </resources>

@@ -27,7 +27,8 @@
                 android:paddingStart="@dimen/logo_side_padding"
                 android:paddingEnd="@dimen/logo_side_padding"
                 android:paddingBottom="@dimen/logo_bottom_padding"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+                android:contentDescription="@string/article_image" />
 
 
             <android.support.v7.widget.Toolbar
