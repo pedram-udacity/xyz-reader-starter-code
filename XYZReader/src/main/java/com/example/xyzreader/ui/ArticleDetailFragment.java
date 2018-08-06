@@ -111,10 +111,10 @@ public class ArticleDetailFragment extends Fragment implements
             return;
         }
 
-        TextView titleView = (TextView) mRootView.findViewById(R.id.article_title_detail);
-        TextView bylineView = (TextView) mRootView.findViewById(R.id.article_byline_detail);
+        TextView titleView =  mRootView.findViewById(R.id.article_title_detail);
+        TextView bylineView =  mRootView.findViewById(R.id.article_byline_detail);
         bylineView.setMovementMethod(new LinkMovementMethod());
-        TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
+        TextView bodyView =  mRootView.findViewById(R.id.article_body);
 
         if (mCursor != null) {
             mRootView.setVisibility(View.VISIBLE);
@@ -138,7 +138,10 @@ public class ArticleDetailFragment extends Fragment implements
                 ));
 
             }
-            String body = mCursor.getString(ArticleLoader.Query.BODY).substring(0, 5000).replaceAll("(\\r\\n){2}", "<br />").replaceAll("\\r\\n", " ");
+            String body = mCursor.getString(ArticleLoader.Query.BODY);
+            if (body.length() > 5000) {
+                body = body.substring(0, 5000).replaceAll("(\\r\\n){2}", "<br />").replaceAll("\\r\\n", " ");
+            }
 
 
             bodyView.setText(Html.fromHtml(body));

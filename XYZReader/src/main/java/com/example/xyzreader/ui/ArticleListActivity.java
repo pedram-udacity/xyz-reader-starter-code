@@ -21,12 +21,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
 import com.example.xyzreader.data.UpdaterService;
+import com.example.xyzreader.utilities.GlideApp;
 import com.example.xyzreader.utilities.MiscUtils;
 
 import java.text.ParseException;
@@ -68,9 +70,9 @@ public class ArticleListActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_article_list);
         supportPostponeEnterTransition();
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
@@ -172,7 +174,7 @@ public class ArticleListActivity extends AppCompatActivity implements
                             ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())));
                     currentPosition = vh.getAdapterPosition();
                     if (MiscUtils.LOLLIPOP_AND_HIGHER) {
-                        DynamicHeightNetworkImageView imageView = (DynamicHeightNetworkImageView) view.findViewById(R.id.main_list_item_thumbnail);
+                        ImageView imageView = view.findViewById(R.id.main_list_item_thumbnail);
                         imageView.setTransitionName(getString(R.string.shared_element_image_view));
                         Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(ArticleListActivity.this,
                                 imageView,
@@ -219,10 +221,10 @@ public class ArticleListActivity extends AppCompatActivity implements
                                 + "<br/>" + " by "
                                 + mCursor.getString(ArticleLoader.Query.AUTHOR)));
             }
-            holder.thumbnailView.setImageUrl(
-                    mCursor.getString(ArticleLoader.Query.THUMB_URL),
-                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
-            holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
+            GlideApp.with(getBaseContext())
+                    .load(mCursor.getString(ArticleLoader.Query.THUMB_URL))
+                    .override(600, 400)
+                    .into(holder.thumbnailView);
         }
 
         @Override
@@ -232,15 +234,15 @@ public class ArticleListActivity extends AppCompatActivity implements
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final DynamicHeightNetworkImageView thumbnailView;
+        public final ImageView thumbnailView;
         public final TextView titleView;
         public final TextView subtitleView;
 
         public ViewHolder(View view) {
             super(view);
-            thumbnailView = (DynamicHeightNetworkImageView) view.findViewById(R.id.main_list_item_thumbnail);
-            titleView = (TextView) view.findViewById(R.id.article_title);
-            subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
+            thumbnailView = view.findViewById(R.id.main_list_item_thumbnail);
+            titleView = view.findViewById(R.id.article_title);
+            subtitleView = view.findViewById(R.id.article_subtitle);
         }
     }
 }

@@ -42,7 +42,7 @@ public class ReadActivity extends AppCompatActivity
         String[] result = body.replaceAll("(\\r\\n){2}", "\n").replaceAll("\\r\\n", " ").split("\n");
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(result));
         BodyTextAdapter bodyTextAdapter = new BodyTextAdapter(this, arrayList);
-        final ListView listView = (ListView) findViewById(R.id.read_tv);
+        final ListView listView = findViewById(R.id.read_tv);
         listView.setAdapter(bodyTextAdapter);
 
     }

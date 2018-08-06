@@ -1,26 +1,22 @@
 <resources>
     <!-- detail -->
-    <dimen name="detail_title_text_size">32sp</dimen>
-    <dimen name="detail_body_text_size">22sp</dimen>
-    <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
 
-    <dimen name="fab_elevation">4dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
-    <dimen name="detail_body_side_margin">8dp</dimen>
-    <dimen name="action_up_button_width">56dp</dimen>
     <dimen name="app_bar_layout_default_height">192dp</dimen>
     <dimen name="logo_side_padding">32dp</dimen>
-    <dimen name="logo_bottom_padding">16dp</dimen>
+    <dimen name="logo_bottom_padding">8dp</dimen>
     <dimen name="recycler_view_bottom_padding">28dp</dimen>
     <dimen name="list_item_article_items_default_margin">8dp</dimen>
-    <dimen name="list_item_article_image_view_dimensions">100dp</dimen>
-    <dimen name="detail_image_view_default_height">100dp</dimen>
 
     <dimen name="detail_article_items_default_margin">8dp</dimen>
     <dimen name="body_text_view_bottom_margin">8dp</dimen>
     <dimen name="body_text_view_text_size">16sp</dimen>
     <dimen name="article_body_padding">8dp</dimen>
     <dimen name="fab_dimensions">56dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="list_item_article_image_view_height">60dp</dimen>
+    <dimen name="list_item_article_image_view_width">100dp</dimen>
 
 </resources>

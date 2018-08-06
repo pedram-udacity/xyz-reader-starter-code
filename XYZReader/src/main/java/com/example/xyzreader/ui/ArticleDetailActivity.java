@@ -7,9 +7,11 @@ import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v13.app.FragmentStatePagerAdapter;
@@ -17,6 +19,7 @@ import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.transition.Fade;
 import android.util.TypedValue;
 import android.view.View;
@@ -25,11 +28,14 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
+import com.example.xyzreader.utilities.GlideApp;
 import com.example.xyzreader.utilities.MiscUtils;
 
 /**
@@ -60,11 +66,23 @@ public class ArticleDetailActivity extends AppCompatActivity
         if (MiscUtils.LOLLIPOP_AND_HIGHER) {
             supportPostponeEnterTransition();
         }
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(" ");
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         getLoaderManager().initLoader(0, null, this);
 
-        mThumbnailImageView = (ImageView) findViewById(R.id.detail_thumbnail_iv);
+        mThumbnailImageView = findViewById(R.id.detail_thumbnail_iv);
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
         mPager.setPageMargin((int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
@@ -82,7 +100,7 @@ public class ArticleDetailActivity extends AppCompatActivity
         });
 
 
-        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
@@ -120,24 +138,63 @@ public class ArticleDetailActivity extends AppCompatActivity
 
     }
 
+
     private void loadThumbnailImageView() {
         if (MiscUtils.LOLLIPOP_AND_HIGHER) {
             mThumbnailImageView.setTransitionName(getString(R.string.shared_element_image_view));
         }
-        ImageLoaderHelper.getInstance(getApplicationContext()).getImageLoader()
-                .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
+
+        GlideApp.with(this)
+                .load(mCursor.getString(ArticleLoader.Query.PHOTO_URL))
+                .override(600,400)
+                .into(new Target<Drawable>() {
                     @Override
-                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                        Bitmap bitmap = imageContainer.getBitmap();
-                        if (bitmap != null) {
-                            mThumbnailImageView.setImageBitmap(imageContainer.getBitmap());
-                            supportStartPostponedEnterTransition();
-                        }
+                    public void onStart() {
                     }
 
                     @Override
-                    public void onErrorResponse(VolleyError volleyError) {
+                    public void onStop() {
+                    }
+
+                    @Override
+                    public void onDestroy() {
+                    }
+
+                    @Override
+                    public void onLoadStarted(@Nullable Drawable placeholder) {
+                    }
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
                         supportStartPostponedEnterTransition();
+                    }
+
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        mThumbnailImageView.setImageDrawable(resource);
+                        supportStartPostponedEnterTransition();
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                    }
+
+                    @Override
+                    public void getSize(@NonNull SizeReadyCallback cb) {
+                    }
+
+                    @Override
+                    public void removeCallback(@NonNull SizeReadyCallback cb) {
+                    }
+
+                    @Override
+                    public void setRequest(@Nullable Request request) {
+                    }
+
+                    @Nullable
+                    @Override
+                    public Request getRequest() {
+                        return null;
                     }
                 });
 

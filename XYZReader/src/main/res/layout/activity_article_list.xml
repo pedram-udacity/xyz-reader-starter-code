@@ -7,10 +7,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_layout_default_height"
+        android:elevation="@dimen/app_bar_elevation"
         android:background="@color/colorPrimary">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/colorPrimary"
@@ -32,7 +32,6 @@
 
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"

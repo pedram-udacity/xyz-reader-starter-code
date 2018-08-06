@@ -17,12 +17,13 @@
         android:layout_height="wrap_content">
 
         <!--suppress AndroidLintContentDescription -->
-        <com.example.xyzreader.ui.DynamicHeightNetworkImageView
+        <ImageView
             android:id="@+id/main_list_item_thumbnail"
-            android:layout_width="@dimen/list_item_article_image_view_dimensions"
-            android:layout_height="@dimen/list_item_article_image_view_dimensions"
+            android:layout_width="@dimen/list_item_article_image_view_width"
+            android:layout_height="@dimen/list_item_article_image_view_height"
             android:layout_margin="@dimen/list_item_article_items_default_margin"
             android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             android:background="@color/photo_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +34,7 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/list_item_article_items_default_margin"
             android:layout_marginStart="@dimen/list_item_article_items_default_margin"
             android:layout_marginTop="@dimen/list_item_article_items_default_margin"
             android:ellipsize="end"
@@ -49,8 +50,9 @@
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/list_item_article_items_default_margin"
             android:layout_marginStart="@dimen/list_item_article_items_default_margin"
+            android:layout_marginBottom="@dimen/list_item_article_items_default_margin"
             android:ellipsize="end"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,15 +1,11 @@
 <resources>
     <!-- detail -->
-    <dimen name="detail_title_text_size">42sp</dimen>
-    <dimen name="detail_body_text_size">20sp</dimen>
-    <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.3</item>
     <dimen name="fab_margin">24dp</dimen>
 
 
     <dimen name="list_item_article_items_default_margin">12dp</dimen>
-    <dimen name="list_item_article_image_view_dimensions">150dp</dimen>
-
-    <dimen name="detail_image_view_default_height">150dp</dimen>
+    <dimen name="list_item_article_image_view_height">90dp</dimen>
+    <dimen name="list_item_article_image_view_width">150dp</dimen>
 
     <dimen name="body_text_view_bottom_margin">12sp</dimen>
     <dimen name="body_text_view_text_size">20sp</dimen>

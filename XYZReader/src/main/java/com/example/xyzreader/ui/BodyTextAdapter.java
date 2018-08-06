@@ -3,6 +3,7 @@ package com.example.xyzreader.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,8 @@ public class BodyTextAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_body_text, parent, false);
         }
 
-        TextView body_text_tv = (TextView) convertView.findViewById(R.id.body_text_tv);
-        body_text_tv.setText(body_text);
+        TextView body_text_tv = convertView.findViewById(R.id.body_text_tv);
+        body_text_tv.setText(Html.fromHtml(body_text));
 
 
         return convertView;    }
